@@ -79,8 +79,15 @@ void PlayerbotFactory::Prepare()
 
     bot->CombatStop(true);
     bot->SetLevel(level);
+
+	if (!sPlayerbotAIConfig.randomBotShowHelmet)
+	{
     bot->SetFlag(PLAYER_FLAGS, PLAYER_FLAGS_HIDE_HELM);
+	}
+	if (!sPlayerbotAIConfig.randomBotShowCloak)
+	{
     bot->SetFlag(PLAYER_FLAGS, PLAYER_FLAGS_HIDE_CLOAK);
+	}
 }
 
 void PlayerbotFactory::Randomize(bool incremental)

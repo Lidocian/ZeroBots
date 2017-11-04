@@ -32,6 +32,8 @@ public:
 	uint32 InvLevel;
 	bool lootRestrictions;
     uint32 openGoSpell;
+	bool randomBotShowHelmet;
+	bool randomBotShowCloak;
     bool randomBotAutologin;
     bool botAutologin;
     std::string randomBotMapsAsString;
