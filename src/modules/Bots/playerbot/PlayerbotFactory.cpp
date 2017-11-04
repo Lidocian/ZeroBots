@@ -1679,11 +1679,11 @@ bool PlayerbotFactory::AddBotBuffs()
 {
 	if (sRandomPlayerbotMgr.IsRandomBot(bot))
 	{
-		bot->CastSpell(bot, 23768, true); //dmg
-		bot->CastSpell(bot, 23737, true); //stam
-		bot->CastSpell(bot, 23767, true); //armor
-		bot->CastSpell(bot, 23769, true); //res
-		bot->CastSpell(bot, 23738, true); //spirit
+		ai->CastSpell(23768, bot); //dmg
+		ai->CastSpell(23737, bot); //stam
+		ai->CastSpell(23767, bot); //armor
+		ai->CastSpell(23769, bot); //res
+		ai->CastSpell(23738, bot); //spirit
 	}
 
 	switch (bot->getClass())
@@ -1692,22 +1692,22 @@ bool PlayerbotFactory::AddBotBuffs()
 	case CLASS_MAGE:
 	case CLASS_WARLOCK:
 	{
-		bot->CastSpell(bot, 23766, true); //int
+		ai->CastSpell(23766, bot); //int
 	}
 		break;
 	case CLASS_PALADIN:
 	case CLASS_WARRIOR:
 	{
-		bot->CastSpell(bot, 23735, true);  //str
+		ai->CastSpell(23735, bot);  //str
 	}
 		break;
 	case CLASS_HUNTER:
 	case CLASS_ROGUE:
 	{
-		bot->CastSpell(bot, 23736, true);  //agi
+		ai->CastSpell(23736, bot);  //agi
 	}
 		break;
+	}
 
-}
-
+	return true;
 }
