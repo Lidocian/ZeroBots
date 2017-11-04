@@ -10,6 +10,8 @@
 #include "ahbot/AhBot.h"
 #include "RandomPlayerbotFactory.h"
 #include "AiFactory.h"
+#include "SpellAuras.h"
+
 
 
 using namespace ai;
@@ -46,6 +48,7 @@ void PlayerbotFactory::Refresh()
     InitFood();
     InitPotions();
     InitPet();
+	AddBotBuffs();
 
     uint32 money = urand(level * 1000, level * 5 * 1000);
     if (bot->GetMoney() < money)
@@ -164,6 +167,7 @@ void PlayerbotFactory::Randomize(bool incremental)
     sLog.outString("Saving to DB...");
     bot->SetMoney(urand(level * 1000, level * 5 * 1000));
     bot->SaveToDB();
+	AddBotBuffs();
     sLog.outDetail("Done.");
 }
 
@@ -1669,4 +1673,41 @@ void PlayerbotFactory::InitGuild()
 
     if (guild->GetMemberSize() < 10)
         guild->AddMember(bot->GetObjectGuid(), urand(GR_OFFICER, GR_INITIATE));
+}
+
+bool PlayerbotFactory::AddBotBuffs()
+{
+	if (sRandomPlayerbotMgr.IsRandomBot(bot))
+	{
+		bot->CastSpell(bot, 23768, true); //dmg
+		bot->CastSpell(bot, 23737, true); //stam
+		bot->CastSpell(bot, 23767, true); //armor
+		bot->CastSpell(bot, 23769, true); //res
+		bot->CastSpell(bot, 23738, true); //spirit
+	}
+
+	switch (bot->getClass())
+	{
+	case CLASS_PRIEST:
+	case CLASS_MAGE:
+	case CLASS_WARLOCK:
+	{
+		bot->CastSpell(bot, 23766, true); //int
+	}
+		break;
+	case CLASS_PALADIN:
+	case CLASS_WARRIOR:
+	{
+		bot->CastSpell(bot, 23735, true);  //str
+	}
+		break;
+	case CLASS_HUNTER:
+	case CLASS_ROGUE:
+	{
+		bot->CastSpell(bot, 23736, true);  //agi
+	}
+		break;
+
+}
+
 }
