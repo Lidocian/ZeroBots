@@ -38,8 +38,8 @@ private:
     static ActionNode* faerie_fire_feral(PlayerbotAI* ai)
     {
         return new ActionNode ("faerie fire (feral)",
-            /*P*/ NextAction::array(0, new NextAction("feral charge - bear"), NULL),
-            /*A*/ NULL,
+            /*P*/ NULL,
+            /*A*/ NextAction::array(0, new NextAction("reach melee"), NULL),
             /*C*/ NULL);
     }
     static ActionNode* bear_form(PlayerbotAI* ai)

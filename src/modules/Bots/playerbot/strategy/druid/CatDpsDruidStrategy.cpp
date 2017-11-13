@@ -83,7 +83,7 @@ NextAction** CatDpsDruidStrategy::getDefaultActions()
 
 void CatDpsDruidStrategy::InitTriggers(std::list<TriggerNode*> &triggers)
 {
-    FeralDruidStrategy::InitTriggers(triggers);
+	GenericDruidStrategy::InitTriggers(triggers);
 
     triggers.push_back(new TriggerNode(
         "cat form",
@@ -116,6 +116,22 @@ void CatDpsDruidStrategy::InitTriggers(std::list<TriggerNode*> &triggers)
 	triggers.push_back(new TriggerNode(
 		"low health",
 		NextAction::array(0, new NextAction("barkskin", ACTION_HIGH + 1), NULL)));
+
+	triggers.push_back(new TriggerNode(
+		"not facing target",
+		NextAction::array(0, new NextAction("set facing", ACTION_NORMAL + 7), NULL)));
+
+	triggers.push_back(new TriggerNode(
+		"enemy out of melee",
+		NextAction::array(0, new NextAction("prowl", ACTION_NORMAL + 9), new NextAction("reach melee", ACTION_NORMAL + 8), NULL)));
+
+	triggers.push_back(new TriggerNode(
+		"enemy too close for melee",
+		NextAction::array(0, new NextAction("move out of enemy contact", ACTION_NORMAL + 8), NULL)));
+
+	triggers.push_back(new TriggerNode(
+		"critical health",
+		NextAction::array(0, new NextAction("dire bear form", ACTION_EMERGENCY + 2), new NextAction("frenzied regeneration", ACTION_EMERGENCY + 1), NULL)));
 
 }
 
