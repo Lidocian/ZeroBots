@@ -1674,28 +1674,6 @@ void PlayerbotFactory::InitGuild()
     if (guild->GetMemberSize() < 10)
         guild->AddMember(bot->GetObjectGuid(), urand(GR_OFFICER, GR_INITIATE));
 }
-// PERCENT damage auras
-// ====================
-/*float DonePercent = 1.0f;
-
-{
-	AuraList const& mModDamagePercentDone = GetAurasByType(SPELL_AURA_MOD_DAMAGE_PERCENT_DONE);
-	for (AuraList::const_iterator i = mModDamagePercentDone.begin(); i != mModDamagePercentDone.end(); ++i)
-	{
-		if (((*i)->GetModifier()->m_miscvalue & schoolMask &&                        // schoolmask has to fit with the intrinsic spell school
-			(*i)->GetModifier()->m_miscvalue & GetMeleeDamageSchoolMask() &&         // AND schoolmask has to fit with weapon damage school (essential for non-physical spells)
-			((*i)->GetSpellProto()->GetEquippedItemClass()) == -1 ||                 // general, weapon independent
-			(pWeapon && pWeapon->IsFitToSpellRequirements((*i)->GetSpellProto()))))  // OR used weapon fits aura requirements
-		{
-			DonePercent *= ((*i)->GetModifier()->m_amount + 100.0f) / 100.0f;
-		}
-	}
-
-	if (attType == OFF_ATTACK)
-		DonePercent *= GetModifierValue(UNIT_MOD_DAMAGE_OFFHAND, TOTAL_PCT);                    // no school check required
-}
-*/
-
 
 bool PlayerbotFactory::AddBotBuffs()
 {
@@ -1703,11 +1681,11 @@ bool PlayerbotFactory::AddBotBuffs()
 	{
 		ai->CastSpell(23768, bot); // Sayge's Fortunes, 10% dmg for 2 hours.
 		ai->CastSpell(24425, bot); /// Spirit of Zandalar, Increases movement speed by 10% and all stats by 15% for 2 hours.
-		ai->CastSpell(22818, bot); // Mol'dar's Moxie, Overall Stamina increased by 15%.
-		ai->CastSpell(22888, bot); /// Rallying Cry of the Dragonslayer, Increases critical chance of spells by 10%, melee and ranged by 5% and grants 140 attack power. 2 hours.
+		//ai->CastSpell(22818, bot); // Mol'dar's Moxie, Overall Stamina increased by 15%.
+		//ai->CastSpell(22888, bot); /// Rallying Cry of the Dragonslayer, Increases critical chance of spells by 10%, melee and ranged by 5% and grants 140 attack power. 2 hours.
 	}
 
-	switch (bot->getClass())
+	/*	switch (bot->getClass())
 	{
 	case CLASS_PRIEST:
 	case CLASS_MAGE:
@@ -1730,7 +1708,7 @@ bool PlayerbotFactory::AddBotBuffs()
 
 	}
 		break;
-	}
-
+	}*/
+	
 	return true;
 }

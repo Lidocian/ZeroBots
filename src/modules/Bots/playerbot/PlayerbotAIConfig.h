@@ -31,6 +31,7 @@ public:
     uint32 lowMana, mediumMana;
 	uint32 InvLevel;
 	bool lootRestrictions;
+	bool randomBotPvP;
     uint32 openGoSpell;
 	bool randomBotShowHelmet;
 	bool randomBotShowCloak;

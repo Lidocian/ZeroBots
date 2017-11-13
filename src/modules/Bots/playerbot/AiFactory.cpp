@@ -110,7 +110,10 @@ void AiFactory::AddDefaultCombatStrategies(Player* player, PlayerbotAI* const fa
 {
     int tab = GetPlayerSpecTab(player);
 
-    engine->addStrategies("racials", "chat", "default", "aoe", "potions", "cast time", "conserve mana", "duel", "pvp", NULL);
+    engine->addStrategies("racials", "chat", "default", "aoe", "potions", "cast time", "conserve mana", "duel", NULL);
+
+	if (!sPlayerbotAIConfig.randomBotPvP)
+		engine->addStrategies("pvp", NULL);
 
     switch (player->getClass())
     {
@@ -279,6 +282,9 @@ void AiFactory::AddDefaultNonCombatStrategies(Player* player, PlayerbotAI* const
 
             nonCombatEngine->addStrategies("dps assist", "cure", NULL);
             break;
+		case CLASS_ROGUE:
+			nonCombatEngine->addStrategy("dps assist");
+			break;
         case CLASS_MAGE:
             if (tab == 1)
                 nonCombatEngine->addStrategy("bdps");
