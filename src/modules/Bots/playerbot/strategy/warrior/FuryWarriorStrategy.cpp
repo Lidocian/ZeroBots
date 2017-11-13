@@ -37,7 +37,7 @@ private:
 	{
 		return new ActionNode ("bloodthirst",
 			/*P*/ NextAction::array(0, new NextAction("berserker stance"), NULL),
-			/*A*/ NULL,
+			/*A*/ NextAction::array(0, new NextAction("heroic strike"), NULL),
 			/*C*/ NULL);
 	}
 	static ActionNode* whirlwind(PlayerbotAI* ai)

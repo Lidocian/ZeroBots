@@ -44,7 +44,7 @@ private:
 	{
 		return new ActionNode("mortal strike",
 			/*P*/ NextAction::array(0, new NextAction("battle stance"), NULL),
-			/*A*/ NULL,
+			/*A*/ NextAction::array(0, new NextAction("heroic strike"), NULL),
 			/*C*/ NULL);
     }
 	static ActionNode* whirlwind(PlayerbotAI* ai)
