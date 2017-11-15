@@ -48,7 +48,7 @@ void PlayerbotFactory::Refresh()
     InitFood();
     InitPotions();
     InitPet();
-	AddBotBuffs();
+	AddRandomBotBoost();
 
     uint32 money = urand(level * 1000, level * 5 * 1000);
     if (bot->GetMoney() < money)
@@ -167,7 +167,7 @@ void PlayerbotFactory::Randomize(bool incremental)
     sLog.outString("Saving to DB...");
     bot->SetMoney(urand(level * 1000, level * 5 * 1000));
     bot->SaveToDB();
-	AddBotBuffs();
+	AddRandomBotBoost();
     sLog.outDetail("Done.");
 }
 
@@ -1675,40 +1675,27 @@ void PlayerbotFactory::InitGuild()
         guild->AddMember(bot->GetObjectGuid(), urand(GR_OFFICER, GR_INITIATE));
 }
 
-bool PlayerbotFactory::AddBotBuffs()
+void PlayerbotFactory::AddRandomBotBoost()
 {
-	if (sRandomPlayerbotMgr.IsRandomBot(bot))
-	{
-		ai->CastSpell(23768, bot); // Sayge's Fortunes, 10% dmg for 2 hours.
-		ai->CastSpell(24425, bot); /// Spirit of Zandalar, Increases movement speed by 10% and all stats by 15% for 2 hours.
-		//ai->CastSpell(22818, bot); // Mol'dar's Moxie, Overall Stamina increased by 15%.
-		//ai->CastSpell(22888, bot); /// Rallying Cry of the Dragonslayer, Increases critical chance of spells by 10%, melee and ranged by 5% and grants 140 attack power. 2 hours.
-	}
+	void ApplyBoost(Player *bot, int boost);
+		{
 
-	/*	switch (bot->getClass())
-	{
-	case CLASS_PRIEST:
-	case CLASS_MAGE:
-	case CLASS_WARLOCK:
-	{
-		ai->CastSpell(23684, bot); //Aura of the Blue Dragon 2% chance successful spellcast to allow 100% of your Mana regeneration to continue while casting for 15 sec.
-	}
-		break;
-	case CLASS_PALADIN:
-	case CLASS_WARRIOR:
-	{
-		ai->CastSpell(20266, bot);  //Divine Strength,Increases your Strength by 10%.
-	}
-		break;
-	case CLASS_HUNTER:
-	case CLASS_ROGUE:
-	{
-		ai->CastSpell(17013, bot);  //Agamaggan's Agility,Increases Agility by 10.
+			if (sRandomPlayerbotMgr.IsRandomBot(bot)) 
+			{
+				
+
+				int boost = 10;
+				for (int32 i = STAT_STRENGTH; i < MAX_STATS; ++i) 
+				{
+					bot->HandleStatModifier(UnitMods(UNIT_MOD_STAT_START + i), TOTAL_PCT, float(boost * 100), true);
+				}
+				bot->SetHealthPercent(100);
+				if (bot->GetPowerType() == POWER_MANA)
+				{
+					bot->SetPower(POWER_MANA, bot->GetMaxPower(POWER_MANA));
+				}
+			}
+		}
 	
 
-	}
-		break;
-	}*/
-	
-	return true;
-}
+};

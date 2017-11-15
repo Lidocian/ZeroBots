@@ -58,7 +58,7 @@ private:
     void InitInventorySkill();
     Item* StoreItem(uint32 itemId, uint32 count);
     void InitGuild();
-	bool AddBotBuffs();
+	void AddRandomBotBoost();
 	void InitQuestSpells();
 
 private:
