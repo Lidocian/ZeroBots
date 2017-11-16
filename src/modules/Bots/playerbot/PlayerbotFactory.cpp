@@ -1688,10 +1688,10 @@ void PlayerbotFactory::AddRandomBotBoost()
 			{
 				
 
-				int boost = 10;
+				int boost = sPlayerbotAIConfig.randomBotBoost;
 				for (int32 i = STAT_STRENGTH; i < MAX_STATS; ++i) 
 				{
-					bot->HandleStatModifier(UnitMods(UNIT_MOD_STAT_START + i), TOTAL_PCT, float(boost * 100), true);
+					bot->HandleStatModifier(UnitMods(UNIT_MOD_STAT_START + i), TOTAL_PCT, float(boost * 10), true);
 				}
 				bot->SetHealthPercent(100);
 				if (bot->GetPowerType() == POWER_MANA)
