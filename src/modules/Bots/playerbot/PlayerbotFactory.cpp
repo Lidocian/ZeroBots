@@ -648,6 +648,7 @@ void PlayerbotFactory::InitEquipment(bool incremental)
         if (slot == EQUIPMENT_SLOT_TABARD || slot == EQUIPMENT_SLOT_BODY)
             continue;
 
+		int tab = AiFactory::GetPlayerSpecTab(bot);
         uint32 desiredQuality = itemQuality;
         if (urand(0, 100) < 100 * sPlayerbotAIConfig.randomGearLoweringChance && desiredQuality > ITEM_QUALITY_NORMAL) {
             desiredQuality--;
@@ -686,6 +687,9 @@ void PlayerbotFactory::InitEquipment(bool incremental)
 
                 if (slot == EQUIPMENT_SLOT_OFFHAND && bot->getClass() == CLASS_ROGUE && proto->Class != ITEM_CLASS_WEAPON)
                     continue;
+
+				if (slot == EQUIPMENT_SLOT_OFFHAND && bot->getClass() == CLASS_WARRIOR && tab == 1 && proto->Class != ITEM_CLASS_WEAPON)
+					continue;
 
 				if (slot == EQUIPMENT_SLOT_OFFHAND && bot->getClass() == CLASS_PALADIN && proto->SubClass != ITEM_SUBCLASS_ARMOR_SHIELD)
 					continue;
