@@ -106,7 +106,8 @@ bool PlayerbotAIConfig::Initialize()
     logInGroupOnly = config.GetBoolDefault("AiPlayerbot.LogInGroupOnly", true);
     logValuesPerTick = config.GetBoolDefault("AiPlayerbot.LogValuesPerTick", false);
     fleeingEnabled = config.GetBoolDefault("AiPlayerbot.FleeingEnabled", true);
-	InvLevel = config.GetFloatDefault("AiPlayerbot.InvLevel", 5);
+	inviteLeveldiff = config.GetFloatDefault("AiPlayerbot.InviteLeveldiff", 5);
+	randomBotBoost = config.GetFloatDefault("AiPlayerbot.RandomBotBoost", 3);
     randomBotMinLevel = config.GetIntDefault("AiPlayerbot.RandomBotMinLevel", 1);
     randomBotMaxLevel = config.GetIntDefault("AiPlayerbot.RandomBotMaxLevel", 255);
     randomBotLoginAtStartup = config.GetBoolDefault("AiPlayerbot.RandomBotLoginAtStartup", true);

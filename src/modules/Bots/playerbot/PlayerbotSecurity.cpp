@@ -40,9 +40,9 @@ PlayerbotSecurityLevel PlayerbotSecurity::LevelFor(Player* from, DenyReason* rea
                     return PLAYERBOT_SECURITY_ALLOW_ALL;
             }
         }
-		int InvLevel = sPlayerbotAIConfig.InvLevel;
+		int inviteLeveldiff = sPlayerbotAIConfig.inviteLeveldiff;
 
-        if ((int)bot->getLevel() - (int)from->getLevel() > InvLevel)
+        if ((int)bot->getLevel() - (int)from->getLevel() > inviteLeveldiff)
 
         {
             if (reason) *reason = PLAYERBOT_DENY_LOW_LEVEL;
