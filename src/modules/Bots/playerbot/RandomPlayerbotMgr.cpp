@@ -612,6 +612,7 @@ void RandomPlayerbotMgr::Refresh(Player* bot)
 
     bot->DurabilityRepairAll(false, 1.0f);
 	bot->SetHealthPercent(100);
+	if (sPlayerbotAIConfig.randomBotPvP)
 	bot->SetPvP(true);
 
     if (bot->GetMaxPower(POWER_MANA) > 0)

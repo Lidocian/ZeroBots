@@ -112,8 +112,8 @@ void AiFactory::AddDefaultCombatStrategies(Player* player, PlayerbotAI* const fa
 
     engine->addStrategies("racials", "chat", "default", "aoe", "potions", "cast time", "conserve mana", "duel", NULL);
 
-	if (!sPlayerbotAIConfig.randomBotPvP)
-		engine->addStrategies("pvp", NULL);
+	if (sPlayerbotAIConfig.randomBotPvP)
+		engine->addStrategy("pvp");
 
     switch (player->getClass())
     {
@@ -311,6 +311,9 @@ void AiFactory::AddDefaultNonCombatStrategies(Player* player, PlayerbotAI* const
     }
     nonCombatEngine->addStrategies("nc", "food", "stay", "chat",
             "default", "quest", "loot", "gather", "duel", "emote", "lfg", "conserve mana", NULL);
+
+	if (sPlayerbotAIConfig.randomBotPvP)
+		nonCombatEngine->addStrategy("pvp");
 
     if (sRandomPlayerbotMgr.IsRandomBot(player))
     {

@@ -1679,6 +1679,7 @@ void PlayerbotFactory::InitGuild()
         guild->AddMember(bot->GetObjectGuid(), urand(GR_OFFICER, GR_INITIATE));
 }
 
+
 void PlayerbotFactory::AddRandomBotBoost()
 {
 	void ApplyBoost(Player *bot, int boost);
@@ -1686,13 +1687,20 @@ void PlayerbotFactory::AddRandomBotBoost()
 
 			if (sRandomPlayerbotMgr.IsRandomBot(bot)) 
 			{
-				
-
-				int boost = sPlayerbotAIConfig.randomBotBoost;
-				for (int32 i = STAT_STRENGTH; i < MAX_STATS; ++i) 
-				{
+            int boost = sPlayerbotAIConfig.randomBotBoost;
+			{
+		        for (int32 i = STAT_STRENGTH; i < MAX_STATS; ++i) 
+				  {
 					bot->HandleStatModifier(UnitMods(UNIT_MOD_STAT_START + i), TOTAL_PCT, float(boost * 10), true);
 				}
+			}
+			{
+				for (int32 i = SPELL_SCHOOL_NORMAL; i < MAX_SPELL_SCHOOL; ++i)
+				  {
+					bot->SetFloatValue(PLAYER_FIELD_MOD_DAMAGE_DONE_POS + i, float(boost * 10));
+				}
+			}
+
 				bot->SetHealthPercent(100);
 				if (bot->GetPowerType() == POWER_MANA)
 				{
@@ -1700,6 +1708,4 @@ void PlayerbotFactory::AddRandomBotBoost()
 				}
 			}
 		}
-	
-
-};
+ };
