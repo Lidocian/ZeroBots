@@ -1091,9 +1091,20 @@ enum PowerDefaults
 
 struct SpellProcEventEntry;                                 // used only privately
 
+
+
 class Unit : public WorldObject
 {
     public:
+		//Spell Damage Modifications 
+
+		uint32 GetSpellDamageModifier() {
+			return m_spellDamageMod;
+		}
+		void SetSpellDamageModifier(uint32 mod) {
+			m_spellDamageMod = mod;
+		}
+
         typedef std::set<Unit*> AttackerSet;
         /**
          * A multimap from spell ids to \ref SpellAuraHolder, multiple \ref SpellAuraHolder can have
@@ -3746,6 +3757,7 @@ class Unit : public WorldObject
         bool m_isSpawningLinked;
 
     private:
+		uint32 m_spellDamageMod = 0;
         void CleanupDeletedAuras();
         void UpdateSplineMovement(uint32 t_diff);
 

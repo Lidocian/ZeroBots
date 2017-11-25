@@ -11,6 +11,9 @@
 #include "RandomPlayerbotFactory.h"
 #include "AiFactory.h"
 #include "SpellAuras.h"
+#include "SpellMgr.h"
+#include "Spell.h"
+#include "SpellAuraDefines.h"
 
 
 
@@ -896,11 +899,11 @@ void PlayerbotFactory::InitBags()
 
 void PlayerbotFactory::EnchantItem(Item* item)
 {
-    if (urand(0, 100) < 100 * sPlayerbotAIConfig.randomGearLoweringChance)
+   /* if (urand(0, 100) < 100 * sPlayerbotAIConfig.randomGearLoweringChance)
         return;
 
-    if (bot->getLevel() < urand(40, 50))
-        return;
+    if (bot->getLevel() < urand(10, 15))
+        return;*/
 
     ItemPrototype const* proto = item->GetProto();
     int32 itemLevel = proto->ItemLevel;
@@ -913,7 +916,7 @@ void PlayerbotFactory::EnchantItem(Item* item)
             continue;
 
         int32 requiredLevel = (int32)entry->baseLevel;
-        if (requiredLevel && (requiredLevel > itemLevel || requiredLevel < itemLevel - 35))
+        if (requiredLevel && (requiredLevel > itemLevel || requiredLevel < itemLevel - 5))
             continue;
 
         if (entry->maxLevel && level > entry->maxLevel)
@@ -972,9 +975,9 @@ void PlayerbotFactory::EnchantItem(Item* item)
     if (!enchant)
         return;
 
-    bot->ApplyEnchantment(item, PERM_ENCHANTMENT_SLOT, false);
-    item->SetEnchantment(PERM_ENCHANTMENT_SLOT, id, 0, 0);
-    bot->ApplyEnchantment(item, PERM_ENCHANTMENT_SLOT, true);
+	bot->ApplyEnchantment(item, PERM_ENCHANTMENT_SLOT, false);
+	item->SetEnchantment(PERM_ENCHANTMENT_SLOT, id, 0, 0);
+	bot->ApplyEnchantment(item, PERM_ENCHANTMENT_SLOT, true);
 }
 
 bool PlayerbotFactory::CanEquipUnseenItem(uint8 slot, uint16 &dest, uint32 item)
@@ -1692,12 +1695,6 @@ void PlayerbotFactory::AddRandomBotBoost()
 		        for (int32 i = STAT_STRENGTH; i < MAX_STATS; ++i) 
 				  {
 					bot->HandleStatModifier(UnitMods(UNIT_MOD_STAT_START + i), TOTAL_PCT, float(boost * 10), true);
-				}
-			}
-			{
-				for (int32 i = SPELL_SCHOOL_NORMAL; i < MAX_SPELL_SCHOOL; ++i)
-				  {
-					bot->SetFloatValue(PLAYER_FIELD_MOD_DAMAGE_DONE_POS + i, float(boost * 10));
 				}
 			}
 

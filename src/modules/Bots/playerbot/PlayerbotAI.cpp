@@ -904,6 +904,16 @@ bool PlayerbotAI::CastSpell(uint32 spellId, Unit* target)
 
     MotionMaster &mm = *bot->GetMotionMaster();
 
+
+	Unit* unit = bot->ToUnit();
+	if (sRandomPlayerbotMgr.IsRandomBot(bot))
+
+	{
+	int boost = sPlayerbotAIConfig.randomBotBoost;
+	if (unit)
+		unit->SetSpellDamageModifier(boost); // Replace with a config/other value
+	}
+
     if (bot->IsFlying())
         return false;
 

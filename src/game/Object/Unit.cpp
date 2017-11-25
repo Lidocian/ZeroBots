@@ -7485,6 +7485,9 @@ int32 Unit::CalculateSpellDamage(Unit const* target, SpellEntry const* spellProt
         (spellProto->Effect[effect_index] != SPELL_EFFECT_APPLY_AURA || spellProto->EffectApplyAuraName[effect_index] != SPELL_AURA_MOD_DECREASE_SPEED))
         { value = int32(value * 0.25f * exp(getLevel() * (70 - spellProto->spellLevel) / 1000.0f)); }
 
+	if (GetSpellDamageModifier() > 0)
+		value = value * GetSpellDamageModifier();
+
     return value;
 }
 
